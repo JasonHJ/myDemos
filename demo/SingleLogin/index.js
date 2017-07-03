@@ -13,7 +13,7 @@
 		var getSingle = function(fn) {
 			var result;
 			return function() {
-				return result || (fn.apply(this, arguments));
+				return result || (result = fn.apply(this, arguments));
 			}
 		};
 		//创建遮罩层和登录框元素
