@@ -1,0 +1,29 @@
+* {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 50%;
+}
+
+#lazy-img {
+    margin-top: 10px;
+}
+
+.head {
+    height: 80px;
+    overflow: hidden;
+    background-color: rgba(255, 128, 0, .5);
+    vertical-align: middle;
+}
+
+#btn {
+    width: 80px;
+    height: 100%;
+    float: right;
+    margin-right: 3%;
+    background-color: rgba(155, 128, 0, .5);
+    outline: none;
+}
