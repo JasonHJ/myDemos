@@ -9,28 +9,23 @@
 <body>
   <h1>获取定位信息</h1>
   <button id="bt">读取我的定位信息</button>
-
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
   <script>
-    console.log(window.navigator.geolocation)
-
     bt.onclick = function(){
       navigator.geolocation.getCurrentPosition(succCB);
     }
 
     function succCB(pos){
-      var div=document.createElement("div");
-      div.innerHTML=`定位的时间：${pos.timestamp}
-                     纬度：${pos.coords.latitude}
-                     经度：${pos.coords.longitude}
-                     海拔：${pos.coords.altitude}
-                     速度：${pos.coords.speed}`
+      var map=new BMap.Map("container");
+      var point = new BMap.Point(pos.coords.latitude, pos.coords.longitude);
+      map.centerAndZoom(point, 15);
+      map.enableScrollWheelZoom(true);
       //console.log(arguments);
       // alert('定位的时间：'+ pos.timestamp)
       // document.write('纬度：'+pos.coords.latitude)
       // document.write('经度：'+pos.coords.longitude)
       // document.write('海拔：'+pos.coords.altitude)
-      // document.write('速度：'+pos.coords.speed)
-      document.body.appendChild(div);
+      // document.write('速度：'+pos.coords.speed)  
     }
   </script>
 </body>
