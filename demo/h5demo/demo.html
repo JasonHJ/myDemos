@@ -3,13 +3,14 @@
 <head lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta charset="UTF-8">
   <title></title>
 </head>
 <body>
   <h1>获取定位信息</h1>
   <button id="bt">读取我的定位信息</button>
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
   <script>
     bt.onclick = function(){
       navigator.geolocation.getCurrentPosition(succCB);
