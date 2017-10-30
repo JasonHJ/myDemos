@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
   <style>
-    #container{height:100%}
+    #container {
+      height: 100%
+    }
   </style>
   <title></title>
 </head>
+
 <body>
   <h1>获取定位信息</h1>
   <button id="bt">读取我的定位信息</button>
-  <div id="container"></div>
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
+  <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script> -->
   <script>
-    bt.onclick = function(){
-      navigator.geolocation.getCurrentPosition(succCB);
+    // bt.onclick = function(){
+    //   navigator.geolocation.getCurrentPosition(succCB);
+    // }
+    function initialize() {
+      var mp = new BMap.Map('map');
+      mp.centerAndZoom(new BMap.Point(121.491, 31.233), 11);
     }
 
-    function succCB(pos){
-      var map=new BMap.Map("container");
+    function loadScript() {
+      var script = document.createElement("script");
+      script.src = "https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W&callback=initialize";
+      document.body.appendChild(script);
+    }
+
+    window.onload = loadScript;
+
+    function succCB(pos) {
+      var div = document.createElement("div");
+      div.id = "container";
+      var map = new BMap.Map("container");
       var point = new BMap.Point(pos.coords.latitude, pos.coords.longitude);
       map.centerAndZoom(point, 15);
       map.enableScrollWheelZoom(true);
+      document.body.appendChild(div);
       //console.log(arguments);
       // alert('定位的时间：'+ pos.timestamp)
       // document.write('纬度：'+pos.coords.latitude)
@@ -33,4 +51,5 @@
     }
   </script>
 </body>
+
 </html>
