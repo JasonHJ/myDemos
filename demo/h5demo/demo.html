@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
   <title></title>
 </head>
@@ -12,11 +14,11 @@
     console.log(window.navigator.geolocation)
 
     bt.onclick = function(){
-      navigator.geolocation.getCurrentPosition(succCB, errCB);
+      navigator.geolocation.getCurrentPosition(succCB);
     }
 
     function succCB(pos){
-      console.log('获取到定位数据成功')
+      alert('获取到定位数据成功')
       //console.log(arguments);
       console.log('定位的时间：', pos.timestamp)
       console.log('纬度：', pos.coords.latitude)
@@ -24,13 +26,6 @@
       console.log('海拔：', pos.coords.altitude)
       console.log('速度：', pos.coords.speed)
     }
-    function errCB(err){
-      console.log('获取到定位数据失败')
-      //console.log(arguments);
-      console.log('错误编号：', err.code);
-      console.log('错误消息：', err.message);
-    }
-
   </script>
 </body>
 </html>
