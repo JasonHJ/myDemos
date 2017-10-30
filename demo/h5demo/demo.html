@@ -25,6 +25,7 @@
     }
 
     function succCB(pos) {
+      alert(pos.coords.longitude);
       var map = new BMap.Map("container");
       var point = new BMap.Point(pos.coords.longitude, pos.coords.latitude);
       map.centerAndZoom(point, 11);
