@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
-
 <head lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <style>
-    #container {
-      height: 100%
-    }
+    #container{width:400px;height:400px}
   </style>
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
   <title></title>
 </head>
-
 <body>
   <h1>获取定位信息</h1>
   <button id="bt">读取我的定位信息</button>
-  <div class="container"></div>
+  <div id="container"></div>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
   <script>
-    bt.onclick = function() {
-      navigator.geolocation.getCurrentPosition(succCB);
+    bt.onclick = function(){
+      navigator.geolocation.getCurrentPosition(succCB);    
     }
-    function succCB(pos) {
-      var map = new BMap.Map("container");
+
+    function succCB(pos){
+      var map=new BMap.Map("container");
       var point = new BMap.Point(pos.coords.latitude, pos.coords.longitude);
       map.centerAndZoom(point, 15);
       map.enableScrollWheelZoom(true);
@@ -36,5 +33,4 @@
     }
   </script>
 </body>
-
 </html>
