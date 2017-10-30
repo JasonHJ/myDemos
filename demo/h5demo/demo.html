@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hello, World</title>
-<style type="text/css">
-html{height:100%}
-body{height:100%;margin:0px;padding:0px}
-#container{height:100%}
-</style>
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W">
-//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
-</script>
+
+<head lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <style>
+    #container {
+      height: 100%
+    }
+  </style>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
+  <title></title>
 </head>
 
 <body>
-<div id="container"></div>
-<script type="text/javascript">
-var map = new BMap.Map("container");
-// 创建地图实例
-var point = new BMap.Point(116.404, 39.915);
-// 创建点坐标
-map.centerAndZoom(point, 15);
-// 初始化地图，设置中心点坐标和地图级别
-</script>
+  <h1>获取定位信息</h1>
+  <button id="bt">读取我的定位信息</button>
+  <div class="container"></div>
+  <script>
+    bt.onclick = function() {
+      navigator.geolocation.getCurrentPosition(succCB);
+    }
+    function succCB(pos) {
+      var map = new BMap.Map("container");
+      var point = new BMap.Point(pos.coords.latitude, pos.coords.longitude);
+      map.centerAndZoom(point, 15);
+      map.enableScrollWheelZoom(true);
+      //console.log(arguments);
+      // alert('定位的时间：'+ pos.timestamp)
+      // document.write('纬度：'+pos.coords.latitude)
+      // document.write('经度：'+pos.coords.longitude)
+      // document.write('海拔：'+pos.coords.altitude)
+      // document.write('速度：'+pos.coords.speed)
+    }
+  </script>
 </body>
+
 </html>
