@@ -15,6 +15,12 @@
       if(navigator.mediaDevices.getUserMedia){
         navigator.mediaDevices.getUserMedia(constrains).then(success).catch(error);
       }
+      else if(navigator.webkitGetUserMedia){
+        navigator.webkitGetUserMedia(constrains,success,error);
+      }
+      else if(navigator.mozGetUserMedia){
+        navigator.mozGetUserMedia(constrains,success,error);
+      }
       else if(navigator.getUserMedia){
         navigator.getUserMedia(constrains,success,error);
       }
@@ -25,13 +31,14 @@
     var context=canvas.getContext("2d");
 
     function success(stream) {
-      video.src=window.URL.createObjectURL(stream);
+      var CompatibleURL=window.URL||window.webkitURL;
+      video.src=CompatibleURL.createObjectURL(stream);
       video.play();
     }
     function error(error) {
       console.log("访问失败：",error.name,error.message);
     }
-    if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia){
+    if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia){
       getUserMedia({video:{width:240,height:160}},success,error);
     }
     else{
