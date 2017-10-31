@@ -1,46 +1,45 @@
 <!DOCTYPE html>
-<html>
-
-<head lang="en">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <style>
-    #container {
-      width: 300px;
-      height: 300px
-    }
-  </style>
-  <title></title>
+  <title>Document</title>
 </head>
-
 <body>
-  <h1>获取定位信息</h1>
-  <button id="bt">读取我的定位信息</button>
-  <div id="container"></div>
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
+  <video style="width:240px;height:160px" id="video"></video>
+  <div><button id="capture">拍照</button></div>
+  <canvas id="canvas" width="240" height="160"></canvas>
   <script>
-    bt.onclick = function() {
-      navigator.geolocation.getCurrentPosition(succCB);
+    function getUserMedia(constrains,success,error){
+      if(navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia(constrains).then(success).catch(error);
+      }
+      else if(navigator.getUserMedia){
+        navigator.getUserMedia(constrains,success,error);
+      }
     }
 
-    function succCB(pos) {
-      alert(pos.coords.longitude);
-      var map = new BMap.Map("container");
-      var point = new BMap.Point(pos.coords.longitude, pos.coords.latitude);
-      map.centerAndZoom(point, 11);
-      map.enableScrollWheelZoom(true);
-      var marker = new BMap.Marker(point); // 创建标注
-      map.addOverlay(marker); // 将标注添加到地图中
-      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-      //console.log(arguments);
-      // alert('定位的时间：'+ pos.timestamp)
-      // document.write('纬度：'+pos.coords.latitude)
-      // document.write('经度：'+pos.coords.longitude)
-      // document.write('海拔：'+pos.coords.altitude)
-      // document.write('速度：'+pos.coords.speed)
+    var video=document.getElementById("video");
+    var canvas=document.getElementById("canvas");
+    var context=canvas.getContext("2d");
+
+    function success(stream) {
+      video.src=window.URL.createObjectURL(stream);
+      video.play();
     }
+    function error(error) {
+      console.log("访问失败：",error.name,error.message);
+    }
+    if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia){
+      getUserMedia({video:{width:240,height:160}},success,error);
+    }
+    else{
+      alert("不支持访问媒体设备");
+    }
+    document.getElementById("capture").addEventListener("click",function () {
+      context.drawImage(video,0,0,240,160);
+    })
   </script>
 </body>
-
 </html>
