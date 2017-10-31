@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    #container {
+      width: 300px;
+      height: 300px
+    }
+  </style>
+  <title></title>
+</head>
+
+<body>
+  <h1>获取定位信息</h1>
+  <button id="bt">读取我的定位信息</button>
+  <div id="container"></div>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65GXpYmFOGQVfpXsWwrsZGsj1Gyt8g7W"></script>
+  <script>
+    bt.onclick = function() {
+      navigator.geolocation.getCurrentPosition(succCB);
+    }
+
+    function succCB(pos) {
+      alert(pos.coords.longitude);
+      var map = new BMap.Map("container");
+      var point = new BMap.Point(pos.coords.longitude, pos.coords.latitude);
+      map.centerAndZoom(point, 11);
+      map.enableScrollWheelZoom(true);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker); // 将标注添加到地图中
+      marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+      //console.log(arguments);
+      // alert('定位的时间：'+ pos.timestamp)
+      // document.write('纬度：'+pos.coords.latitude)
+      // document.write('经度：'+pos.coords.longitude)
+      // document.write('海拔：'+pos.coords.altitude)
+      // document.write('速度：'+pos.coords.speed)
+    }
+  </script>
+</body>
+
+</html>
