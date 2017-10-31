@@ -43,7 +43,7 @@
     }
     if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia){
       alert("222222");
-      getUserMedia({video:true},success,error);
+      getUserMedia({video:{facingMode:'user'}},success,error);
     }
     else{
       alert("不支持访问媒体设备");
