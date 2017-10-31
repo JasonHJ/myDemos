@@ -13,6 +13,7 @@
   <script>
     function getUserMedia(constraints,success,error){
       if(navigator.mediaDevices.getUserMedia){
+        alert("1111111");
         navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
       }
       else if(navigator.webkitGetUserMedia){
@@ -39,6 +40,7 @@
       console.log("访问失败：",error.name,error.message);
     }
     if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia){
+      alert("222222");
       getUserMedia({video:{facingMode:'user',width:240,height:160}},success,error);
     }
     else{
