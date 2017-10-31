@@ -7,22 +7,22 @@
   <title>Document</title>
 </head>
 <body>
-  <video style="width:240px;height:160px" id="video"></video>
+  <video autoplay style="width:240px;height:160px" id="video"></video>
   <div><button id="capture">拍照</button></div>
   <canvas id="canvas" width="240" height="160"></canvas>
   <script>
-    function getUserMedia(constrains,success,error){
+    function getUserMedia(constraints,success,error){
       if(navigator.mediaDevices.getUserMedia){
-        navigator.mediaDevices.getUserMedia(constrains).then(success).catch(error);
+        navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
       }
       else if(navigator.webkitGetUserMedia){
-        navigator.webkitGetUserMedia(constrains,success,error);
+        navigator.webkitGetUserMedia(constraints,success,error);
       }
       else if(navigator.mozGetUserMedia){
-        navigator.mozGetUserMedia(constrains,success,error);
+        navigator.mozGetUserMedia(constraints,success,error);
       }
       else if(navigator.getUserMedia){
-        navigator.getUserMedia(constrains,success,error);
+        navigator.getUserMedia(constraints,success,error);
       }
     }
 
