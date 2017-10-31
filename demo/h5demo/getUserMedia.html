@@ -1,76 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Take a photo</title>
 </head>
-
+//PC浏览器上可以调用摄像头，但移动端不行
 <body>
   <video autoplay width="640" height="480" id="video"></video>
   <button id="capture">拍照</button>
   <canvas id="canvas" width="640" height="480"></canvas>
   <script>
-    function getUserMedia(constraints,success,error){
-      if(navigator.mediaDevices.getUserMedia){
-        alert("1111111");
+    function getUserMedia(constraints, success, error) {
+      if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
-      }
-      else if(navigator.webkitGetUserMedia){
-        navigator.webkitGetUserMedia(constraints,success,error);
-      }
-      else if(navigator.mozGetUserMedia){
-        navigator.mozGetUserMedia(constraints,success,error);
-      }
-      else if(navigator.getUserMedia){
-        navigator.getUserMedia(constraints,success,error);
+      } else if (navigator.webkitGetUserMedia) {
+        navigator.webkitGetUserMedia(constraints, success, error);
+      } else if (navigator.mozGetUserMedia) {
+        navigator.mozGetUserMedia(constraints, success, error);
+      } else if (navigator.getUserMedia) {
+        navigator.getUserMedia(constraints, success, error);
       }
     }
 
-    var video=document.getElementById("video");
-    var canvas=document.getElementById("canvas");
-    var context=canvas.getContext("2d");
+    var video = document.getElementById("video");
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
 
     function success(stream) {
-      var CompatibleURL=window.URL||window.webkitURL;
-      video.src=CompatibleURL.createObjectURL(stream);
+      var CompatibleURL = window.URL || window.webkitURL;
+      video.src = CompatibleURL.createObjectURL(stream);
       video.play();
     }
+
     function error(error) {
-      console.log("访问失败：",error.name,error.message);
+      console.log("访问失败：", error.name, error.message);
     }
-    if(navigator.mediaDevices.getUserMedia||navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia){
-      alert("222222");
-      getUserMedia({video:{facingMode:'user'}},success,error);
-    }
-    else{
+    if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+      getUserMedia({
+        video: {
+          facingMode: 'user'
+        }
+      }, success, error);
+    } else {
       alert("不支持访问媒体设备");
     }
-    document.getElementById("capture").addEventListener("click",function () {
-      context.drawImage(video,0,0,240,160);
+    document.getElementById("capture").addEventListener("click", function() {
+      context.drawImage(video, 0, 0, 240, 160);
     })
-    // var canvas = document.getElementById('canvas');
-    // var context = canvas.getContext('2d');
-    // var video = document.getElementById('video');
-    //
-    //
-    // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    //   alert("22")
-    //
-    //   navigator.mediaDevices.getUserMedia({
-    //     video: true
-    //   }).then(function(stream) {
-    //     video.src = window.URL.createObjectURL(stream);
-    //     video.play();
-    //   });
-    // }
-    // document.getElementById("capture").addEventListener("click", function() {
-    //   alert("1111");
-    //   context.drawImage(video, 0, 0, 640, 480);
-    // });
   </script>
 </body>
-
 </html>
