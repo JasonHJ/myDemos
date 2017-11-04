@@ -28,12 +28,13 @@
         var randomTime=Math.random()*10000<<0;
         setTimeout(function() {
           var message=getMessage();
+          console.log(window.parent);
           window.parent.postMessage(message,'http://localhost:80');
           postMessageLoop();
         },randomTime)
       };
       postMessageLoop();
-    })();
+    }());
   </script>
 </body>
 </html>
