@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    ;
+    (function(w) {
+      let messages = [
+        '今天天气不错',
+        '明天的会议大家不要迟到',
+        '今晚大家去吃一段好的',
+        '打车记得拿发票',
+        '明天请假一天',
+        '这本书干货很多，大家好好看'
+      ];
+      var getMessage = function() {
+        var index = Math.random * messages.length << 0;
+        return messages[index];
+      };
+      var postMessageLoop=function() {
+        var randomTime=Math.random()*10000<<0;
+        setTimeout(function() {
+          var message=getMessage();
+          window.parent.postMessage(message,'http://localhost:8080');
+          postMessage();
+        },randomTime)
+      };
+      postMessage();
+    })(window);
+  </script>
+</body>
+</html>
