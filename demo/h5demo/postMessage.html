@@ -21,7 +21,8 @@
         '这本书干货很多，大家好好看'
       ];
       var getMessage = function() {
-        var index = Math.random * messages.length << 0;
+        var index = Math.random() * messages.length << 0;
+        alert(index);
         return messages[index];
       };
       var postMessageLoop=function() {
