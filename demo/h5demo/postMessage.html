@@ -29,10 +29,10 @@
         setTimeout(function() {
           var message=getMessage();
           window.parent.postMessage(message,'http://localhost:80');
-          postMessage();
+          postMessageLoop();
         },randomTime)
       };
-      postMessage();
+      postMessageLoop();
     })(window);
   </script>
 </body>
