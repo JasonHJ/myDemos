@@ -11,7 +11,7 @@
 <body>
   <script>
     ;
-    (function(w) {
+    (function() {
       let messages = [
         '今天天气不错',
         '明天的会议大家不要迟到',
@@ -22,7 +22,6 @@
       ];
       var getMessage = function() {
         var index = Math.random() * messages.length << 0;
-        alert(index);
         return messages[index];
       };
       var postMessageLoop=function() {
@@ -34,7 +33,7 @@
         },randomTime)
       };
       postMessageLoop();
-    })(window);
+    })();
   </script>
 </body>
 </html>
