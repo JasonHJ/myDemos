@@ -28,7 +28,7 @@
         var randomTime=Math.random()*10000<<0;
         setTimeout(function() {
           var message=getMessage();
-          window.parent.postMessage(message,'http://localhost:8080');
+          window.parent.postMessage(message,'http://localhost:80');
           postMessage();
         },randomTime)
       };
